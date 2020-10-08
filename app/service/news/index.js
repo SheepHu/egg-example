@@ -4,24 +4,20 @@ const Service = require('egg').Service;
 
 class NewsService extends Service {
   async list(page = 1) {
-    const { serverUrl, pageSize } = this.config.news;
-    // const data = await this.ctx.curl(`${serverUrl}/topstories.json`, {
-    //   // data: {
-    //   //   orderBy: '"$key"',
-    //   //   startAt: `${pageSize * (page - 1)}`,
-    //   //   endAt: `${pageSize * page - 1}`,
-    //   // },
-    //   dataType: 'json',
-    //   timeout: 3000,
-    // });
-    const { data: idList } = await this.ctx.curl('https://registry.npm.taobao.org/egg/latest', {
-      // 自动解析 JSON response
-      dataType: 'json',
-      // 3 秒超时
-      timeout: 3000,
-    });
+    // read config
+    // const { serverUrl, pageSize } = this.config.news;
 
-    // console.log(idList);
+    // // use build-in http client to GET hacker-news api
+    // const { data: idList } = await this.ctx.curl(`${serverUrl}/topstories.json`, {
+    //   data: {
+    //     orderBy: '"$key"',
+    //     startAt: `"${pageSize * (page - 1)}"`,
+    //     endAt: `"${pageSize * page - 1}"`,
+    //   },
+    //   dataType: 'json',
+    // });
+
+    // // parallel GET detail
     // const newsList = await Promise.all(
     //   Object.keys(idList).map(key => {
     //     const url = `${serverUrl}/item/${idList[key]}.json`;
@@ -29,6 +25,12 @@ class NewsService extends Service {
     //   })
     // );
     // return newsList.map(res => res.data);
+    const { data: idList } = await this.ctx.curl('https://registry.npm.taobao.org/egg/latest', {
+      // 自动解析 JSON response
+      dataType: 'json',
+      // 3 秒超时
+      timeout: 3000,
+    });
     return idList;
   }
 }
