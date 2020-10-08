@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+ul,ol,li {
+  list-style: none;
+}
+
+a,u {
+  text-decoration: none;
+}
+
+.view {
+  width: 400px;
+  background-color: goldenrod;
+}
+
+.item {
+  margin-bottom: 20px;
+  background-color: white;
+  text-align: center;
+  font-size: 18px;
+  padding: 10px 0;
+}
+
+.item:hover {
+  background-color: hotpink;
+}
+
+.item>span {
+  color: #333;
+}
